@@ -1,86 +1,150 @@
 :root {
-    --primary: #e67e22;
-    --secondary: #c0392b;
-    --dark: #121212;
-    --gold: #ffcc00;
+    --royal-maroon: #5d0000;
+    --gold-bright: #ffd700;
+    --gold-dark: #b8860b;
+    --deep-black: #0a0a0a;
 }
 
 body {
+    background: var(--deep-black);
+    color: #fff;
     font-family: 'Yantra Manav', sans-serif;
     margin: 0;
-    background-color: #fffaf0;
     overflow-x: hidden;
 }
 
 body.locked { overflow: hidden; }
 
-/* --- Entrance --- */
+/* --- Entrance Overlay --- */
 #video-overlay {
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle, #2c3e50, #000000);
-    z-index: 10000;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+    top: 0; z-index: 9999;
+    width: 100%; height: 100vh;
+    background: #000;
+    display: flex; justify-content: center; align-items: center;
+    transition: 1s cubic-bezier(0.8, 0, 0.2, 1);
 }
 
-.enter-btn {
-    background: linear-gradient(45deg, var(--primary), #d35400);
-    color: white; padding: 18px 55px; border: none;
-    border-radius: 50px; font-size: 1.6rem; cursor: pointer; margin-top: 30px;
+.loader-content { text-align: center; }
+
+.video-frame {
+    border: 4px solid var(--gold-dark);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(184, 134, 11, 0.5);
 }
 
-/* --- Header --- */
-header {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url('527307266_18018795476753881_7200169681623509279_n.jpg');
-    background-size: cover; background-position: center; text-align: center;
+.shlok { color: var(--gold-bright); font-size: 1.8rem; margin-bottom: 25px; text-shadow: 0 0 15px gold; }
+
+.enter-btn-gold {
+    background: linear-gradient(to right, var(--gold-dark), var(--gold-bright));
+    border: none; padding: 18px 50px; font-size: 1.5rem; font-weight: 900;
+    border-radius: 5px; cursor: pointer; margin-top: 30px; transition: 0.3s;
+    color: var(--royal-maroon);
 }
 
-.header-top-row { display: flex; align-items: center; justify-content: center; gap: 30px; flex-wrap: wrap; }
-.side-logo { width: 140px; height: 140px; border-radius: 50%; border: 4px solid var(--gold); }
-.main-mandal-name { font-size: 3rem; text-shadow: 2px 2px 15px #000; }
-.raja-title { font-size: 5rem; color: var(--gold); font-weight: bold; margin: 25px 0; opacity: 0; transform: translateY(20px); }
-.reveal-text { animation: fadeInUp 1.5s forwards ease-out; }
-.establishment-text { font-size: 2rem; opacity: 0.9; }
+.enter-btn-gold:hover { transform: scale(1.05); filter: brightness(1.2); }
 
-@keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
-
-/* --- Gallery Layout --- */
-#heritage-section { padding: 80px 10%; text-align: center; }
-.section-title { font-size: 3.5rem; color: var(--secondary); margin-bottom: 50px; }
-
-.gallery-cover {
-    position: relative; cursor: pointer; background: white; padding: 15px;
-    border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); transition: 0.4s;
+/* --- Hero Section --- */
+.hero-header {
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.85)), 
+                url('527307266_18018795476753881_7200169681623509279_n.jpg') center/cover;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center;
 }
-.gallery-cover img { width: 100%; height: 550px; object-fit: cover; border-radius: 15px; }
-.gallery-caption { font-size: 1.8rem; margin-top: 20px; }
 
-.cover-overlay {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    background: rgba(230, 126, 34, 0.9); color: white; padding: 20px 40px;
-    border-radius: 50px; font-size: 1.5rem; opacity: 0; transition: 0.3s;
+.glass-nav {
+    position: absolute; top: 0; width: 100%; padding: 20px 0;
+    background: rgba(0,0,0,0.3); backdrop-filter: blur(10px);
 }
-.gallery-cover:hover .cover-overlay { opacity: 1; }
 
-.gallery-grid {
+.nav-logo { display: flex; align-items: center; justify-content: center; gap: 15px; }
+.nav-logo img { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--gold-bright); }
+.nav-logo span { font-size: 1.8rem; font-weight: 700; color: var(--gold-bright); }
+
+.mandal-name-glow {
+    font-size: 3rem; letter-spacing: 2px;
+    background: linear-gradient(white, #ffd700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(255,255,255,0.2);
+}
+
+.raja-title-xl {
+    font-size: 7rem; /* Massive Professional Title */
+    font-family: 'Cinzel Decorative', cursive;
+    color: var(--gold-bright);
+    margin: 30px 0;
+    text-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+    animation: goldGlow 2.5s infinite alternate;
+}
+
+@keyframes goldGlow {
+    from { text-shadow: 0 0 15px gold; }
+    to { text-shadow: 0 0 35px gold, 0 0 60px orange; }
+}
+
+.divider-gold { width: 250px; height: 4px; background: var(--gold-bright); margin: 15px 0; border-radius: 2px; }
+
+.est-year { font-size: 2.2rem; color: #eee; letter-spacing: 4px; font-weight: 400; }
+
+/* --- Heritage Gallery --- */
+#heritage-section { padding: 120px 10%; background: #0f0f0f; }
+
+.section-heading {
+    font-size: 4.5rem; text-align: center; color: var(--gold-bright); 
+    margin-bottom: 70px; font-family: 'Cinzel Decorative', cursive;
+}
+
+.gallery-cover-premium {
+    position: relative; max-width: 1000px; margin: 0 auto;
+    border: 6px solid var(--gold-dark); border-radius: 20px; overflow: hidden;
+    cursor: pointer; transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.gallery-cover-premium img { width: 100%; height: 600px; object-fit: cover; }
+
+.overlay-glass {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6); display: flex; flex-direction: column;
+    justify-content: center; align-items: center; font-size: 2.5rem;
+    color: var(--gold-bright); opacity: 0; transition: 0.5s;
+}
+
+.gallery-cover-premium:hover .overlay-glass { opacity: 1; }
+.gallery-cover-premium:hover { transform: scale(1.02); }
+
+.gallery-grid-dynamic {
     display: none; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 30px; margin-top: 50px; animation: fadeInUp 0.8s forwards;
+    gap: 35px; margin-top: 60px;
 }
-.photo-card { background: white; padding: 15px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-.photo-card img { width: 100%; height: 350px; object-fit: cover; border-radius: 12px; }
-.photo-card p { font-size: 1.6rem; font-weight: bold; margin-top: 15px; }
 
-.year-tag { position: absolute; top: 30px; right: 30px; background: var(--secondary); color: white; padding: 8px 20px; border-radius: 8px; font-weight: bold; }
+.photo-card-premium {
+    background: #1a1a1a; border-radius: 15px; padding: 15px;
+    border-bottom: 5px solid var(--gold-dark); transition: 0.4s;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
 
-footer { background: var(--dark); color: white; padding: 60px 20px; text-align: center; }
-footer h3 { font-size: 2.8rem; color: var(--gold); }
+.photo-card-premium:hover { transform: translateY(-15px); border-color: var(--gold-bright); }
+.photo-card-premium img { width: 100%; height: 380px; object-fit: cover; border-radius: 10px; }
+.photo-card-premium p { text-align:center; color:gold; font-size:1.6rem; font-weight: 700; padding:15px 0; }
+
+.year-tag { 
+    position: absolute; top: 30px; right: 30px; 
+    background: var(--gold-dark); color: #000; 
+    padding: 10px 25px; border-radius: 8px; font-weight: 900; z-index: 5;
+}
+
+/* --- Footer --- */
+.royal-footer { background: #000; border-top: 3px solid var(--gold-dark); padding: 80px 0; text-align: center; }
+.footer-box h3 { color: var(--gold-bright); font-size: 2.5rem; margin-bottom: 25px; }
+.social-links a { color: #fff; font-size: 2.5rem; margin: 0 20px; transition: 0.3s; }
+.social-links a:hover { color: var(--gold-bright); transform: scale(1.2); }
+
+@media (max-width: 768px) {
+    .raja-title-xl { font-size: 3.5rem; }
+    .mandal-name-glow { font-size: 1.8rem; }
+    .section-heading { font-size: 2.5rem; }
+    .gallery-cover-premium img { height: 350px; }
+}
